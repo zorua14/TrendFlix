@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, ActivityIndicator, Animated } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Animated } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { StatusBar } from 'expo-status-bar'

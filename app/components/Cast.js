@@ -26,11 +26,11 @@ const Cast = ({ cast }) => {
                                 } style={{ alignSelf: "center", width: 60, height: 60, borderRadius: 30, backgroundColor: "white" }} />
 
                                 <Text style={{ color: "white", fontSize: 14, fontFamily: "Lato-Bold", textAlign: "center", marginTop: 10 }}>
-                                    {item.character?.length > 10 ? item.character?.substring(0, 10) + '..' : item.character}
+                                    {item.character?.length > 10 ? item.character?.substring(0, 10) + '..' : (item.character ? item.character : "NA")}
 
                                 </Text>
                                 <Text style={{ color: Colors.Text_Light_Gray, fontSize: 14, fontFamily: "Lato-Regular", textAlign: "center", marginTop: 5 }}>
-                                    {item.name?.length > 10 ? item.name?.substring(0, 10) + '..' : item.name}
+                                    {item.name?.length > 10 ? item.name?.substring(0, 10) + '..' : (item.name ? item.name : "NA")}
 
                                 </Text>
 

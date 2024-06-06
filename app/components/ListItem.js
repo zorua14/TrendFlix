@@ -1,16 +1,20 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import * as Animatable from 'react-native-animatable'
 const ListItem = ({ item, navigation, movie, index }) => {
-    const maxDuration = 4000; // Maximum duration in ms
+    const maxDuration = 3000; // Maximum duration in ms
     const baseDuration = 1000; // Base duration in ms
     const duration = Math.min(baseDuration * ((index % 20) + 0.7), maxDuration);
     return (
         <TouchableOpacity onPress={() => navigation.navigate('detail_screen', { item, movie })} style={styles.movieContainer}>
             <Animatable.View style={styles.content} animation={'slideInUp'} duration={duration}>
-                <Animatable.Image animation={'zoomIn'} duration={duration} source={{ uri: `https://image.tmdb.org/t/p/w342/${item.poster_path}` }} style={styles.image} />
+                <Animatable.Image animation={'zoomIn'} duration={duration} resizeMode={item.poster_path ? null : "center"} style={[styles.image, { backgroundColor: item.poster_path ? null : "white" }]} source={
+                    item.poster_path
+                        ? { uri: `https://image.tmdb.org/t/p/w342${item.poster_path}` }
+                        : require('../../assets/images/404.png')
+                } />
                 <Animatable.Text animation={'zoomIn'} duration={duration} style={styles.title} numberOfLines={1}
                     ellipsizeMode="tail">{movie ? item.title : item.original_name}</Animatable.Text>
                 <Animatable.View style={styles.ratingContainer} animation={'slideInLeft'} duration={duration}>

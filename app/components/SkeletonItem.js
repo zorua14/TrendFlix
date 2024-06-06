@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { createShimmerPlaceHolder } from 'expo-shimmer-placeholder'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -13,7 +13,6 @@ const SkeletonItem = () => {
                 <ShimmerPlaceHolder style={styles.ratingContainer}>
                     {/* <Ionicons name="star" size={20} color="yellow" />
                     <Text style={styles.rating}>{item.vote_average}</Text> */}
-
                 </ShimmerPlaceHolder>
             </View>
         </View>

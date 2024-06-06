@@ -1,6 +1,6 @@
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from "react";
-import { Ionicons, Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import { getMovieCast, getMovieDetails, getSeriesCast, getSeriesDetails } from "../api/tmdb";
 import Loading from "../components/Loading";
@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/Cast';
-
+import * as Animatable from 'react-native-animatable'
 
 const { width, height } = Dimensions.get('window')
 const DetailScreen = ({ navigation, route }) => {
@@ -37,8 +37,6 @@ const DetailScreen = ({ navigation, route }) => {
         const data = movie ? await getMovieCast(id) : await getSeriesCast(id);
 
         if (data && data.cast) {
-
-
             setCast(data.cast)
         };
 
@@ -54,7 +52,7 @@ const DetailScreen = ({ navigation, route }) => {
                 <View style={{ width: "100%" }}>
                     <SafeAreaView style={styles.safe}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Ionicons name="arrow-back-circle-sharp" size={30} color="yellow" />
+                            <Ionicons name="arrow-back-circle-sharp" size={35} color="yellow" />
                         </TouchableOpacity>
                         <Text
                             style={{ color: "white", fontSize: 24, fontFamily: "Lato-Bold" }}
@@ -67,13 +65,14 @@ const DetailScreen = ({ navigation, route }) => {
 
                     </SafeAreaView>
 
+                    <View >
+                        <Image
 
-                    <View>
-                        <Image source={
-                            details.poster_path
-                                ? { uri: `https://image.tmdb.org/t/p/w500/${details.poster_path}` }
-                                : require('../../assets/images/404.png')
-                        }
+                            source={
+                                details.poster_path
+                                    ? { uri: `https://image.tmdb.org/t/p/w500/${details.poster_path}` }
+                                    : require('../../assets/images/404.png')
+                            }
                             style={{ width, height: height * 0.55 }} />
                         <LinearGradient
                             colors={['transparent', 'rgba(23,23,23,0.8)', 'rgba(23,23,23,1)']}
@@ -85,24 +84,21 @@ const DetailScreen = ({ navigation, route }) => {
 
                 </View>
                 <View style={{ marginTop: -(height * 0.09), marginVertical: 10 }}>
-                    <Text style={{ color: "white", fontSize: 30, fontFamily: "Lato-Bold", textAlign: "center", marginHorizontal: 10 }}>
+                    <Animatable.Text animation={'fadeInLeft'} style={{ color: "white", fontSize: 30, fontFamily: "Lato-Bold", textAlign: "center", marginHorizontal: 10 }}>
                         {movie ? details.title : (details.original_name || "No Title")}
-                    </Text>
-                    <Text style={{ color: Colors.Text_Light_Gray, fontFamily: "Lato-Bold", textAlign: "center", margin: 10 }}>
+                    </Animatable.Text>
+                    <Animatable.Text animation={'fadeInRight'} style={{ color: Colors.Text_Light_Gray, fontFamily: "Lato-Bold", textAlign: "center", margin: 10 }}>
                         {details.status} . {movie ? details.release_date.split('-')[0] : (details.first_air_date.split('-')[0] || "No Date")} . {movie ? (details.runtime) + " min" : (details.number_of_seasons ? (details.number_of_seasons + " Season") : "NA")}
-                    </Text>
+                    </Animatable.Text>
                     <View style={{ flexDirection: "row", justifyContent: "center", marginHorizontal: 10 }}>
                         {
                             details.genres.map((genre, index) => {
                                 let showdot = index + 1 != details.genres.length
                                 return (
-                                    <Text key={index} style={{ textAlign: "center", fontFamily: "Lato-Regular", color: "white", marginHorizontal: 2 }}>{genre.name}{ } {showdot ? "." : ""}</Text>
+                                    <Animatable.Text animation={'zoomIn'} duration={(index + 1) * 1000} key={index} style={{ textAlign: "center", fontFamily: "Lato-Regular", color: "white", marginHorizontal: 2 }}>{genre.name}{ } {showdot ? "." : ""}</Animatable.Text>
                                 )
                             })}
 
-                        {/* <Text style={{ textAlign: "center", fontFamily: "Lato-Regular", color: "white" }}>Action .</Text>
-                        <Text style={{ textAlign: "center", fontFamily: "Lato-Regular", color: "white", marginLeft: 5 }}>Action .</Text>
-                        <Text style={{ textAlign: "center", fontFamily: "Lato-Regular", color: "white", marginLeft: 5 }}>Action .</Text> */}
 
                     </View>
                     <Text style={{ justifyContent: "center", textAlign: details.overview ? "justify" : "center", fontFamily: "Lato-Regular", color: "white", paddingTop: 15, paddingHorizontal: 15 }}>
@@ -111,13 +107,8 @@ const DetailScreen = ({ navigation, route }) => {
 
                 </View>
                 <Cast cast={cast} />
-
-
             </ScrollView>
             )
-
-
-
     )
 }
 

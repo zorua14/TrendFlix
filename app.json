@@ -6,9 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "extra": {
-      "apiKey": "${b9be9fb7ef2499eb74cb743a5b1057b0}"
-    },
     "plugins": [
       [
         "expo-font",
