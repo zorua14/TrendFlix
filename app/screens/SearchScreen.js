@@ -80,7 +80,7 @@ const SearchScreen = () => {
                                     return (
                                         <TouchableWithoutFeedback
                                             key={index}
-                                            onPress={() => navigation.push('detail_screen', { item, movie: true })}
+                                            onPress={() => navigation.push('detail_screen', { item, movie: movie })}
 
                                         >
                                             <View style={{ marginVertical: 10, }}>
