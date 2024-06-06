@@ -1,4 +1,4 @@
 export default {
-    api_key: "b9be9fb7ef2499eb74cb743a5b1057b0",
-    bearer: "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWJlOWZiN2VmMjQ5OWViNzRjYjc0M2E1YjEwNTdiMCIsInN1YiI6IjY2MzUyNzJlNjYxMWI0MDEyYTY3MzQ0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.O6zM1WQk1rTiNlvFiGWi2InP853a9vpDlkCPqu-NQ8Q",
+    api_key: "Your_Key",
+    bearer: "Bearer",
 }
