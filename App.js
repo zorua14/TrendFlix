@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import AppNavigator from './AppNavigator';
 import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen'
+import * as SplashScreen from 'expo-splash-screen';
+import { MenuProvider } from 'react-native-popup-menu';
 
 
 
@@ -25,7 +26,9 @@ export default function App() {
     SplashScreen.hideAsync()
   }
   return (
-    <AppNavigator />
+    <MenuProvider>
+      <AppNavigator />
+    </MenuProvider>
   );
 }
 

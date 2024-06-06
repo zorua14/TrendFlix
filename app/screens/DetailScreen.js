@@ -52,10 +52,10 @@ const DetailScreen = ({ navigation, route }) => {
                 <View style={{ width: "100%" }}>
                     <SafeAreaView style={styles.safe}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Ionicons name="arrow-back-circle-sharp" size={35} color="yellow" />
+                            <Ionicons name="arrow-back-circle-sharp" size={30} color="yellow" />
                         </TouchableOpacity>
                         <Text
-                            style={{ color: "white", fontSize: 24, fontFamily: "Lato-Bold" }}
+                            style={{ color: "white", fontSize: 30, fontFamily: "Lato-Bold" }}
                         >
                             {" "}
                         </Text>

@@ -9,7 +9,8 @@ import Keys from '../constants/Keys'
 import ListItem from '../components/ListItem'
 import SkeletonItem from '../components/SkeletonItem'
 import Error from '../components/Error'
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, MaterialIcons } from '@expo/vector-icons'
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 
 
 const MoviesScreen = ({ navigation }) => {
@@ -92,13 +93,56 @@ const MoviesScreen = ({ navigation }) => {
             <ListItem item={item} navigation={navigation} movie={true} index={index} />
         )
     };
+    const sortByName = () => {
+        const sortedMovies = [...movies].sort((a, b) => {
+            const nameA = a.title || "";
+            const nameB = b.title || "";
+            return nameA.localeCompare(nameB);
+        });
+        setMovies(sortedMovies);
+    };
+
+
+    const sortByRating = () => {
+        const sortedMovies = [...movies].sort((a, b) => {
+            const ratingA = a.vote_average ?? 0;
+            const ratingB = b.vote_average ?? 0;
+            return ratingB - ratingA;  // Descending order
+        });
+        setMovies(sortedMovies);
+    };
+
+
+    const sortByPopularity = () => {
+        const sortedMovies = [...movies].sort((a, b) => {
+            const rankA = a.popularity ?? 0;
+            const rankB = b.popularity ?? 0;
+            return rankB - rankA;  // Descending order
+        });
+        setMovies(sortedMovies);
+    };
     return (
         //MARK: add if no error show second list
         <View style={styles.container}>
             <SafeAreaView style={{ marginBottom: 20 }}>
                 <StatusBar barStyle="light-content" backgroundColor={Colors.Top_Bar_Color} />
                 <View style={styles.header}>
-                    <Entypo name="menu" size={30} color="white" />
+                    <Menu>
+                        <MenuTrigger >
+                            <MaterialIcons name="sort" size={30} color="white" />
+                        </MenuTrigger>
+                        <MenuOptions>
+                            <MenuOption onSelect={sortByName}>
+                                <Text style={{ padding: 10 }}>Sort by Name</Text>
+                            </MenuOption>
+                            <MenuOption onSelect={sortByRating}>
+                                <Text style={{ padding: 10 }}>Sort by Rating</Text>
+                            </MenuOption>
+                            <MenuOption onSelect={sortByPopularity}>
+                                <Text style={{ padding: 10 }}>Sort by Popularity</Text>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
                     <Text style={{ color: "white", fontSize: 24, fontFamily: "Lato-Bold" }}>Popular Movies</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('search_screen', { movie: true })}>
                         <Entypo name="magnifying-glass" size={30} color="white" />
