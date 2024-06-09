@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Animated } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Animated, Dimensions } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { StatusBar } from 'expo-status-bar'
@@ -11,7 +11,7 @@ import SkeletonItem from '../components/SkeletonItem'
 import Error from '../components/Error'
 import { Entypo, MaterialIcons } from '@expo/vector-icons'
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
-
+const { width, height } = Dimensions.get('window')
 const SeriesScreen = ({ navigation }) => {
     const [series, setSeries] = useState([]);
     const [page, setPage] = useState(0)
@@ -124,7 +124,7 @@ const SeriesScreen = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <SafeAreaView style={{ marginBottom: 20 }}>
+            <SafeAreaView style={{ marginBottom: height * 0.05 }}>
                 <StatusBar barStyle="light-content" backgroundColor={Colors.Top_Bar_Color} />
                 <View style={styles.header}>
                     <Menu>

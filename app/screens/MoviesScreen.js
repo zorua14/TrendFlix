@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Animated } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Animated, Dimensions } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { StatusBar } from 'expo-status-bar'
@@ -12,7 +12,7 @@ import Error from '../components/Error'
 import { Entypo, MaterialIcons } from '@expo/vector-icons'
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 
-
+const { width, height } = Dimensions.get('window')
 const MoviesScreen = ({ navigation }) => {
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(0)
@@ -76,9 +76,8 @@ const MoviesScreen = ({ navigation }) => {
                     .catch(err => {
                         setFetching(false)
                         setFirstLaunch(false)
-                        console.log("Something is wrong")
 
-                        // Alert.alert("Uh Oh..", err)
+
                     });
 
             }, 1000);
@@ -128,7 +127,7 @@ const MoviesScreen = ({ navigation }) => {
     return (
         //MARK: add if no error show second list
         <View style={styles.container}>
-            <SafeAreaView style={{ marginBottom: 20 }}>
+            <SafeAreaView style={{ marginBottom: height * 0.05 }}>
                 <StatusBar barStyle="light-content" backgroundColor={Colors.Top_Bar_Color} />
                 <View style={styles.header}>
                     <Menu>
