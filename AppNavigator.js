@@ -7,6 +7,7 @@ import SeriesScreen from './app/screens/SeriesScreen';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from './app/constants/Colors';
 import SearchScreen from './app/screens/SearchScreen';
+import Favourites from './app/screens/Favourites';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,6 +46,9 @@ export default function AppNavigator() {
                         } else if (route.name === 'Series') {
                             iconName = focused ? 'tv' : 'tv-outline';
                         }
+                        else {
+                            iconName = focused ? 'heart' : 'heart-outline';
+                        }
 
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
@@ -73,6 +77,7 @@ export default function AppNavigator() {
                         return { backgroundColor: Colors.Top_Bar_Color };
                     })(route)
                 })} />
+                <Tab.Screen name="Favourites" component={Favourites} options={{ headerShown: false }} />
             </Tab.Navigator>
         </NavigationContainer>
     )

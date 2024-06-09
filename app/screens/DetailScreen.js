@@ -9,18 +9,24 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/Cast';
 import * as Animatable from 'react-native-animatable'
+import { useSelector, useDispatch } from 'react-redux';
+import { addMovie, removeMovie } from '../Redux/MovieSlice';
 
 const { width, height } = Dimensions.get('window')
 const DetailScreen = ({ navigation, route }) => {
     //movie is a bool to show it is a movie or a tv show
+    const movies = useSelector(state => state.movies)
+    const dispatch = useDispatch();
 
     const { item, movie } = route.params
     const [loading, setLoading] = useState(true);
     const [details, setDetails] = useState({});
     const [cast, setCast] = useState([1, 2, 3, 4, 5]);
     const [isLiked, setIsLiked] = useState(false);
-    useEffect(() => {
 
+    useEffect(() => {
+        const movieExists = movies.some(movie => movie.id === item.id);
+        setIsLiked(movieExists);
         getDetails(item.id);
         getCast(item.id);
     }, []);
@@ -42,6 +48,17 @@ const DetailScreen = ({ navigation, route }) => {
 
     };
 
+    const handleAddMovie = () => {
+        dispatch(addMovie(details));
+        setIsLiked(true); // Set the movie as liked
+    };
+
+    const handleRemoveMovie = () => {
+        console.log("remove");
+        dispatch(removeMovie(item.id));
+        setIsLiked(false); // Set the movie as unliked
+    };
+
     return (
         loading ? (<Loading />) :
             (<ScrollView
@@ -59,7 +76,7 @@ const DetailScreen = ({ navigation, route }) => {
                         >
                             {" "}
                         </Text>
-                        <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
+                        <TouchableOpacity onPress={isLiked ? handleRemoveMovie : handleAddMovie}>
                             <Ionicons name={isLiked ? "heart-sharp" : "heart-outline"} size={30} color={isLiked ? "yellow" : "white"} />
                         </TouchableOpacity>
 
