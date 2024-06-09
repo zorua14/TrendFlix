@@ -18,7 +18,7 @@ const SeriesScreen = ({ navigation }) => {
     const [totalPage, setTotalPage] = useState(1)
     const [fetching, setFetching] = useState(false)
     const [isFirstLaunch, setFirstLaunch] = useState(true)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(false)
 
     const [showButton, setShowButton] = useState(false);
     const flatListRef = useRef(null)
@@ -58,7 +58,9 @@ const SeriesScreen = ({ navigation }) => {
                         if (response.status === 200) {
                             return response.json();
                         } else {
+                            setError(true)
                             throw new Error("Something went wrong")
+
                         }
                     })
                     .then(response => {
@@ -72,14 +74,14 @@ const SeriesScreen = ({ navigation }) => {
                     .catch(err => {
                         setFetching(false)
                         setFirstLaunch(false)
-                        setError(err.message)
-                        console.error(err.message)
+
                     });
             }, 1000);
 
         } else {
             setFetching(false)
             setFirstLaunch(false)
+
         }
     }
 
@@ -117,6 +119,9 @@ const SeriesScreen = ({ navigation }) => {
         });
         setSeries(sortedSeries);
     };
+    if (error) {
+        return <Error message={"Something went wrong. Please try again later."} />;
+    }
     return (
         <View style={styles.container}>
             <SafeAreaView style={{ marginBottom: 20 }}>
@@ -145,12 +150,13 @@ const SeriesScreen = ({ navigation }) => {
                     </TouchableOpacity>
 
                 </View>
+
                 {isFirstLaunch ? (<FlatList
                     data={[1, 1, 1, 1, 1, 1]}
                     renderItem={() => <SkeletonItem />}
                     numColumns={2}
 
-                />) : error ? (<Error message={error} />) : (
+                />) : (
                     <FlatList
                         ref={flatListRef}
                         data={series}

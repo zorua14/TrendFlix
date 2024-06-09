@@ -49,7 +49,8 @@ const DetailScreen = ({ navigation, route }) => {
     };
 
     const handleAddMovie = () => {
-        dispatch(addMovie(details));
+        const newMovie = { id: details.id, title: details.title, poster_path: details.poster_path }
+        dispatch(addMovie(newMovie));
         setIsLiked(true); // Set the movie as liked
     };
 
@@ -69,16 +70,21 @@ const DetailScreen = ({ navigation, route }) => {
                 <View style={{ width: "100%" }}>
                     <SafeAreaView style={styles.safe}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Ionicons name="arrow-back-circle-sharp" size={30} color="yellow" />
+                            <Ionicons name="arrow-back-circle-sharp" size={35} color="yellow" />
                         </TouchableOpacity>
                         <Text
                             style={{ color: "white", fontSize: 30, fontFamily: "Lato-Bold" }}
                         >
-                            {" "}
+                            {""}
                         </Text>
-                        <TouchableOpacity onPress={isLiked ? handleRemoveMovie : handleAddMovie}>
-                            <Ionicons name={isLiked ? "heart-sharp" : "heart-outline"} size={30} color={isLiked ? "yellow" : "white"} />
-                        </TouchableOpacity>
+                        {!movie ? (<Text
+                            style={{ color: "white", fontSize: 30, fontFamily: "Lato-Bold" }}
+                        >
+                            {""}
+                        </Text>) : (
+                            <TouchableOpacity onPress={isLiked ? handleRemoveMovie : handleAddMovie}>
+                                <Ionicons name={isLiked ? "heart-sharp" : "heart-outline"} size={35} color={isLiked ? "yellow" : "white"} />
+                            </TouchableOpacity>)}
 
                     </SafeAreaView>
 

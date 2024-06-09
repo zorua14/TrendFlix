@@ -19,7 +19,7 @@ const MoviesScreen = ({ navigation }) => {
     const [totalPage, setTotalPage] = useState(1)
     const [fetching, setFetching] = useState(false)
     const [isFirstLaunch, setFirstLaunch] = useState(true)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(false)
 
     const [showButton, setShowButton] = useState(false);
     const flatListRef = useRef(null)
@@ -61,6 +61,7 @@ const MoviesScreen = ({ navigation }) => {
                         if (response.status === 200) {
                             return response.json();
                         } else {
+                            setError(true)
                             throw new Error("Something went wrong")
                         }
                     })
@@ -75,8 +76,8 @@ const MoviesScreen = ({ navigation }) => {
                     .catch(err => {
                         setFetching(false)
                         setFirstLaunch(false)
-                        setError(err.message)
-                        console.error(err.message)
+                        console.log("Something is wrong")
+
                         // Alert.alert("Uh Oh..", err)
                     });
 
@@ -121,6 +122,9 @@ const MoviesScreen = ({ navigation }) => {
         });
         setMovies(sortedMovies);
     };
+    if (error) {
+        return <Error message={"Something went wrong. Please try again later."} />;
+    }
     return (
         //MARK: add if no error show second list
         <View style={styles.container}>
@@ -153,7 +157,7 @@ const MoviesScreen = ({ navigation }) => {
                     renderItem={() => <SkeletonItem />}
                     numColumns={2}
 
-                />) : error ? (<Error message={error} />) : (
+                />) : (
                     <FlatList
                         ref={flatListRef}
                         data={movies}
