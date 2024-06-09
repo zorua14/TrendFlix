@@ -1,7 +1,8 @@
-**App Description:**
-This React Native app displays popular movies and series using data fetched from an API, utilizing React Navigation for navigation, Axios for API calls, and Animatable for animations. It also includes sorting functionality to help users easily find their favorite content.
+**What's TrendFlix:**
+A React Native app that displays popular movies and series using data fetched from TMDB. It utilizes React Navigation, Axios, Animatable, Redux for state management, Redux Persist to store favorite movies, and React Native Share to share movie list.
+
 
 <div align="center">
-  <img src="https://github.com/zorua14/TrendFlix/assets/94368303/9d176b68-dc84-4ff4-8ee8-68565fcef31a" width="512" height="512">
+  <img src="https://github.com/zorua14/TrendFlix/assets/94368303/33b4dafd-6228-4f31-a04c-1e59e58f1fb0" width="512" height="512">
 </div>
 
