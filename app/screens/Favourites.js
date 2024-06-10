@@ -51,10 +51,10 @@ const Favourites = () => {
                     source={item.poster_path
                         ? { uri: `https://image.tmdb.org/t/p/w342${item.poster_path}` }
                         : require('../../assets/images/404.png')}
-                    style={{ width: 120, height: 120, borderRadius: 15 }}
+                    style={{ width: 100, height: 150, borderRadius: 15 }}
                 />
                 <View style={{ flex: 1 }}>
-                    <Text style={{ color: Colors.Text_Light_Gray, fontSize: 18, fontFamily: "Lato-Regular", padding: 10, }} numberOfLines={1} ellipsizeMode="tail">
+                    <Text style={{ color: Colors.Text_Light_Gray, fontSize: 18, fontFamily: "Lato-Regular", padding: 10, }} numberOfLines={2} ellipsizeMode="tail">
                         {item.title}
                     </Text>
                     <TouchableOpacity onPress={() => deleteMovie(item.id)}>
@@ -125,17 +125,14 @@ const styles = StyleSheet.create({
     },
     listitem: {
 
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        shadowOffset: { width: 0, height: 2 },
-        elevation: 5,
-        marginVertical: 5,
+
+        marginTop: 5,
         marginHorizontal: 20,
         padding: 15,
         flexDirection: 'row',
         alignItems: 'center',
+        borderBottomColor: "rgba(255,255,255,0.3)",
+        borderBottomWidth: 1,
 
 
     }
