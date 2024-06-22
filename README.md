@@ -13,5 +13,5 @@ Below is a demo of the app. To try the app, download the provided APK from the l
 
 https://github.com/zorua14/TrendFlix/assets/94368303/03d4c974-cd8c-427b-b267-808e293f407e
 
-[Download the APK here](https://drive.google.com/file/d/1cSE8VBHbd6dZijsqrt4RyhP-jCG__5Q7/view?usp=sharing)
+[Download the APK here](https://drive.google.com/file/d/1kCLqclJbo9rdbx5OsrLCqiGLmmgiImxy/view?usp=drive_link)
 
